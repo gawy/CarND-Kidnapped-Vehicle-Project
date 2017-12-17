@@ -22,7 +22,7 @@ struct Particle {
 	std::vector<double> sense_x;
 	std::vector<double> sense_y;
 };
-
+void printParticle(Particle &p);
 
 
 class ParticleFilter {
