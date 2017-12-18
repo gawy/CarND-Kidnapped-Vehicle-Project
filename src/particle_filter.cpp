@@ -46,11 +46,39 @@ void ParticleFilter::init(double x, double y, double theta, double std[]) {
 }
 
 void ParticleFilter::prediction(double delta_t, double std_pos[], double velocity, double yaw_rate) {
-	// TODO: Add measurements to each particle and add random Gaussian noise.
+	// Add measurements to each particle and add random Gaussian noise.
 	// NOTE: When adding noise you may find std::normal_distribution and std::default_random_engine useful.
 	//  http://en.cppreference.com/w/cpp/numeric/random/normal_distribution
 	//  http://www.cplusplus.com/reference/random/default_random_engine/
 
+  std::default_random_engine gen;
+
+  for (int i=0; i < num_particles; i++) {
+    Particle& p = particles[i];
+
+    if (yaw_rate > 1e-6) { // yaw rate not equal to zero
+      p.x = p.x + velocity/yaw_rate * (sin(p.theta + yaw_rate*delta_t) - sin(p.theta));
+      p.y = p.y + velocity/yaw_rate * (cos(p.theta) - cos(p.theta + yaw_rate*delta_t));
+      p.theta += yaw_rate * delta_t;
+
+      // yaw is modified only in this case so we add noise only here
+      normal_distribution<double> distribution_theta(p.theta, std_pos[2]);
+      p.theta = distribution_theta(gen);
+    } else { // yaw rate equal to zero
+//      cout << p.x << " => " << p.x + velocity * delta_t * cos(p.theta) << endl;
+      p.x = p.x + velocity * delta_t * cos(p.theta);
+      p.y = p.y + velocity * delta_t * sin(p.theta);
+      // theta does not change
+    }
+
+    // add noise to positional variables
+    normal_distribution<double> distribution_x(p.x, std_pos[0]);
+    normal_distribution<double> distribution_y(p.y, std_pos[1]);
+    p.x = distribution_x(gen);
+    p.y = distribution_y(gen);
+
+//    printParticle(particles[i]);
+  }
 }
 
 void ParticleFilter::dataAssociation(std::vector<LandmarkObs> predicted, std::vector<LandmarkObs>& observations) {

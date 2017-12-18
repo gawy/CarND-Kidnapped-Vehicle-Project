@@ -9,6 +9,15 @@ Your robot has been kidnapped and transported to a new location! Luckily it has 
 
 In this project you will implement a 2 dimensional particle filter in C++. Your particle filter will be given a map and some initial localization information (analogous to what a GPS would provide). At each time step your filter will also get observation and control data. 
 
+## Running Tests
+
+Project has Googletest framework integrated as part of the structure.
+All unit tests are contained in `test` folder.
+
+There are 2 ways to run all tests:
+1. Directly via googletest executable `make && ./gtest_suite`
+2. Via CTest command `make test`. In this case only short summary will be printed without any detailed of actual tests.
+
 ## Running the Code
 This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
 
