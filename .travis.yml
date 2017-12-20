@@ -1,7 +1,7 @@
 language: cpp
 sudo: required
 
-before-install:
+before_install:
   chmod +x install-ubuntu.sh
   echo 'Update apt'
   sudo apt-get -qq update
