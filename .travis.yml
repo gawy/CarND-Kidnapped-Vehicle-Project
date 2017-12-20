@@ -2,11 +2,12 @@ language: cpp
 sudo: required
 
 before_install:
-  chmod +x install-ubuntu.sh
-  echo 'Update apt'
-  sudo apt-get -qq update
-  echo 'libuv1-dev libssl-dev'
-  sudo apt-get install -y libuv1-dev libssl-dev
+  - chmod +x install-ubuntu.sh
+  - echo 'Update apt'
+  - sudo apt-get -qq update
+  - echo 'libuv1-dev libssl-dev'
+  - sudo apt-get install -y libuv1-dev libssl-dev
+  
 install: ./install-ubuntu.sh
 
 script: ./build.sh
