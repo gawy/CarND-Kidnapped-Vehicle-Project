@@ -30,8 +30,6 @@ class ParticleFilter {
 	// Number of particles to draw
 	int num_particles; 
 	
-	
-	
 	// Flag, if filter is initialized
 	bool is_initialized;
 	
@@ -115,6 +113,20 @@ public:
 	const bool initialized() const {
 		return is_initialized;
 	}
+
+	std::vector<LandmarkObs>
+  translateCoordinatesFromParticleToMap(Particle &particle, const std::vector<LandmarkObs> &vector);
+
+  /**
+   * Create associations of observations to map landmarks for a specific particle.
+   * @param particle particle object to build associations for
+   * @param observations observations vector
+   * @param map map of landmarks
+   */
+	void associateObservationsWithLandmarks(Particle &particle,
+                                          std::vector<LandmarkObs> &observations,
+                                          const std::vector<Map::single_landmark_s> &map_landmarks,
+                                          double std_landmark[]);
 };
 
 
