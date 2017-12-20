@@ -3,7 +3,7 @@ sudo: required
 
 before-install:
   chmod +x install-ubuntu.sh
-  sudo apt-get install libuv1-dev libssl-dev
+  sudo apt-get install -y libuv1-dev libssl-dev
 install: ./install-ubuntu.sh
 
 script: ./build.sh
