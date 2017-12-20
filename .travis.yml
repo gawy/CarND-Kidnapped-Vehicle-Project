@@ -1,4 +1,5 @@
 language: cpp
+sudo: required
 
 before-install:
   chmod +x install-ubuntu.sh
