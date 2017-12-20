@@ -1,0 +1,7 @@
+language: cpp
+
+before-install:
+  chmod +x install-ubuntu.sh
+install: ./install-ubuntu.sh
+
+script: ./build.sh
