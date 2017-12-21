@@ -3,6 +3,7 @@ sudo: required
 
 before_install:
   - chmod +x install-ubuntu.sh
+  - apt-cache search libuv
 
 install: ./install-ubuntu.sh
 
