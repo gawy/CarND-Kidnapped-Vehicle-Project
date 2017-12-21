@@ -127,7 +127,7 @@ void ParticleFilter::resample() {
     weights.push_back(particles[i].weight);
   }
 
-  discrete_distribution<double> distribution(weights.begin(), weights.end());
+  discrete_distribution<> distribution(weights.begin(), weights.end());
   std::random_device rd{};
   std::mt19937 gen{rd()};
 
